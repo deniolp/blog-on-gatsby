@@ -5,7 +5,7 @@ import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import {rhythm, scale} from '../utils/typography';
+import {rhythm} from '../utils/typography';
 
 class BlogPostContentfulTemplate extends React.Component {
   render() {
@@ -16,21 +16,12 @@ class BlogPostContentfulTemplate extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title={post.title} description={post.subtitle} />
-        <h1
-          style={{
-            marginTop: rhythm(1),
-            marginBottom: 0,
-          }}
-        >
-          {post.title}
-        </h1>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: documentToReactComponents(
-              post.childContentfulPostContentRichTextNode.json
-            ),
-          }}
-        />
+        <h1>{post.title}</h1>
+        <div>
+          {documentToReactComponents(
+            post.childContentfulPostContentRichTextNode.json
+          )}
+        </div>
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -74,12 +65,12 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
-        subtitle
         author
       }
     }
-    contentfulPost(slug: {eq: $slug!}) {
+    contentfulPost(slug: {eq: $slug}) {
       title
+      subtitle
       author
       childContentfulPostContentRichTextNode {
         json
