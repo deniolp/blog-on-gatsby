@@ -34,8 +34,8 @@ class BlogIndex extends React.Component {
         {posts.map(({node}) => {
           const title = node.title || node.slug;
           return (
-            <Link style={{boxShadow: `none`}} to={node.slug}>
-              <Post key={node.slug}>
+            <Link style={{boxShadow: `none`}} to={node.slug} key={node.slug}>
+              <Post>
                 <PostImage>
                   <Img fluid={node.image.fluid} />
                 </PostImage>
