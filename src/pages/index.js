@@ -2,11 +2,11 @@ import React from 'react';
 import {Link, graphql} from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
+import {rhythm} from '../utils/typography';
 
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import {rhythm} from '../utils/typography';
 
 const Post = styled.div`
   display: flex;
@@ -34,24 +34,24 @@ class BlogIndex extends React.Component {
         {posts.map(({node}) => {
           const title = node.title || node.slug;
           return (
-            <Post key={node.slug}>
-              <PostImage>
-                <Img fluid={node.image.fluid} />
-              </PostImage>
-              <PostText>
-                <h3
-                  style={{
-                    marginTop: 0,
-                    marginBottom: rhythm(1 / 4),
-                  }}
-                >
-                  <Link style={{boxShadow: `none`}} to={node.slug}>
+            <Link style={{boxShadow: `none`}} to={node.slug}>
+              <Post key={node.slug}>
+                <PostImage>
+                  <Img fluid={node.image.fluid} />
+                </PostImage>
+                <PostText>
+                  <h3
+                    style={{
+                      marginTop: 0,
+                      marginBottom: rhythm(1 / 4),
+                    }}
+                  >
                     {title}
-                  </Link>
-                </h3>
-                <p>{node.subtitle}</p>
-              </PostText>
-            </Post>
+                  </h3>
+                  <p>{node.subtitle}</p>
+                </PostText>
+              </Post>
+            </Link>
           );
         })}
       </Layout>
